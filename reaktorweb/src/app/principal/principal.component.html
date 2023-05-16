@@ -1,0 +1,7 @@
+<h3 style="text-align: center; font-weight: bolder; margin-bottom: 5%;">Información de Ordenadores del Centro</h3>
+
+<div class="computer-cards-container">
+  <div class="computer-card" *ngFor="let computer of computers">
+    <app-computer-card [malwareCount]="computer.malwareCount" [location]="computer.location" [responsable]="computer.responsable" [id]="computer.id" [computerOn]="computer.computerOn"></app-computer-card>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+server:
+  port: 1563
+
+reaktor:
+  server:
+    url: "http://localhost:8084"

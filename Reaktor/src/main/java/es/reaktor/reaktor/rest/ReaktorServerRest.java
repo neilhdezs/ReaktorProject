@@ -9,6 +9,7 @@ import es.reaktor.reaktor.reaktor_actions.ReaktorActions;
 import es.reaktor.reaktor.reaktor_actions.ReaktorService;
 import es.reaktor.reaktor.repository.IMalwareRepository;
 import es.reaktor.reaktor.repository.IMotherboardRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
+@Slf4j
 public class ReaktorServerRest
 {
 
@@ -102,8 +104,8 @@ public class ReaktorServerRest
             @RequestBody Malware newMalware
     )
     {
-        this.iMalwareRepository.save(newMalware);
-        return ResponseEntity.ok("Malware created");
+        log.info("Creating malware {}", newMalware);
+        return ResponseEntity.ok().body(this.iMalwareRepository.save(newMalware));
     }
 
 

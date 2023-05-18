@@ -17,6 +17,20 @@ public class ReaktorDTO extends Reaktor
 
     private CpuDTO cpuDTO;
 
+    private List<GraphicCardDTO> graphicCardDTO;
+
+    private List<HardDiskDTO> hardDiskDTO;
+
+    private List<NetworkCardDTO> networkCardDTO;
+
+    private List<PartitionDTO> partitionDTO;
+
+    private List<RamDTO> ramDTO;
+
+    private List<SoundCardDTO> soundCardDTO;
+
+    private List<MalwareDTO> malwareDTO;
+
 
 
 }

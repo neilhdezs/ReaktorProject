@@ -53,6 +53,7 @@ public class Ram
     /**
      * Attribute - speed
      */
+    @Column(name = "speed")
     private Long speed;
 
 

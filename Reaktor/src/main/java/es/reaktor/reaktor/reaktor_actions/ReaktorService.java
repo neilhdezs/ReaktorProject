@@ -1,9 +1,7 @@
 package es.reaktor.reaktor.reaktor_actions;
 
 import es.reaktor.models.*;
-import es.reaktor.models.DTO.CpuDTO;
-import es.reaktor.models.DTO.ReaktorDTO;
-import es.reaktor.models.DTO.SimpleComputerDTO;
+import es.reaktor.models.DTO.*;
 import es.reaktor.reaktor.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,14 +40,6 @@ public class ReaktorService
     @Autowired
     private IPartitionRepository iPartitionRepository;
 
-
-
-
-
-
-
-
-
     public List<SimpleComputerDTO> getSimpleComputerDTO()
     {
         List<SimpleComputerDTO> simpleComputerDTOS = new ArrayList<>();
@@ -69,31 +59,80 @@ public class ReaktorService
     {
         CpuDTO cpu = this.convertToCpuDTO(this.iCpuRepository.findCpuById_Motherboard_SerialNumber(idComputer));
 
-        Motherboard motherboard = this.iMotherboardRepository.findBySerialNumber(idComputer);
+        MotherboardDTO motherboard = this.convertToMotherboardDTO(this.iMotherboardRepository.findBySerialNumber(idComputer));
 
-        List<GraphicCard> graphicCardList = this.iGraphicCardRepository.findAll()
-                .stream().filter(graphicCard -> Objects.equals(graphicCard.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
+        List<GraphicCardDTO> graphicCardList = this.iGraphicCardRepository.findAll()
+                .stream().filter(graphicCard -> Objects.equals(graphicCard.getId().getMotherboard().getSerialNumber(), idComputer))
+                .map(this::convertToGraphicCardDTO).toList();
 
-        List<HardDisk> hardDiskList = this.iHardDiskRepository.findAll()
-                .stream().filter(hardDisk -> Objects.equals(hardDisk.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
+        List<HardDiskDTO> hardDiskList = this.iHardDiskRepository.findAll()
+                .stream().filter(hardDisk -> Objects.equals(hardDisk.getId().getMotherboard().getSerialNumber(), idComputer))
+                .map(this::convertToHardDiskDTO).toList();
 
-        List<NetworkCard> networkCardList = this.iNetworkCardRepository.findAll()
-                .stream().filter(networkCard -> Objects.equals(networkCard.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
+        List<NetworkCardDTO> networkCardList = this.iNetworkCardRepository.findAll()
+                .stream().filter(networkCard -> Objects.equals(networkCard.getId().getMotherboard().getSerialNumber(), idComputer))
+                .map(this::convertToNetworkCardDTO).toList();
 
-        List<Ram> ramList = this.iRamRepository.findAll()
-                .stream().filter(ram -> Objects.equals(ram.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
+        List<RamDTO> ramList = this.iRamRepository.findAll()
+                .stream().filter(ram -> Objects.equals(ram.getId().getMotherboard().getSerialNumber(), idComputer))
+                .map(this::convertToRamDTO).toList();
 
-        List<SoundCard> soundCardList = this.iSoundCardRepository.findAll()
-                .stream().filter(soundCard -> Objects.equals(soundCard.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
+        List<SoundCardDTO> soundCardList = this.iSoundCardRepository.findAll()
+                .stream().filter(soundCard -> Objects.equals(soundCard.getId().getMotherboard().getSerialNumber(), idComputer))
+                .map(this::convertToSoundCardDTO).toList();
 
-        List<Partition> partitionList = this.iPartitionRepository.findAll()
-                .stream().filter(partition -> Objects.equals(partition.getId().getHardDisk().getId().getMotherboard().getSerialNumber(), idComputer)).toList();
+        List<PartitionDTO> partitionList = this.iPartitionRepository.findAll()
+                .stream().filter(partition -> Objects.equals(partition.getId().getHardDisk().getId().getMotherboard().getSerialNumber(), idComputer))
+                .map(this::convertToPartitionDTO).toList();
 
-        List<Malware> malwareList = this.iMotherboardMalwareRepository.findAll()
-                .stream().filter(motherboardMalware -> Objects.equals(motherboardMalware.getSerialNumber().getSerialNumber(), idComputer)).toList()
-                .stream().map(MotherboardMalware::getName).toList();
+        List<MalwareDTO> malwareList = this.iMotherboardMalwareRepository.findAll()
+                .stream().filter(motherboardMalware -> Objects.equals(motherboardMalware.getSerialNumber().getSerialNumber(), idComputer))
+                .map(MotherboardMalware::getName)
+                .map(this::convertToMalwareDTO).toList();
 
-        return new ReaktorDTO(motherboard,malwareList,cpu,graphicCardList,hardDiskList,networkCardList,partitionList,ramList,soundCardList);
+        return new ReaktorDTO(motherboard,cpu,graphicCardList,hardDiskList,networkCardList,partitionList,ramList,soundCardList,malwareList);
+    }
+
+    private MalwareDTO convertToMalwareDTO(Malware malware)
+    {
+        return new MalwareDTO(malware.getName(),malware.getDescription());
+    }
+
+
+    private PartitionDTO convertToPartitionDTO(Partition partition)
+    {
+        return new PartitionDTO(partition.getId().getIdPartition(),partition.getSize(),partition.getLetter(),partition.getOperatingSystem());
+    }
+
+
+    private SoundCardDTO convertToSoundCardDTO(SoundCard soundCard)
+    {
+        return new SoundCardDTO(soundCard.getId().getIdSoundCard(),soundCard.getModel(),soundCard.getDriver());
+    }
+
+    private RamDTO convertToRamDTO(Ram ram)
+    {
+        return new RamDTO(ram.getId().getSerialNumberRam(),ram.getSize(),ram.getOccupiedSlots(),ram.getModel(),ram.getType(),ram.getSize());
+    }
+
+    private NetworkCardDTO convertToNetworkCardDTO(NetworkCard networkCard)
+    {
+        return new NetworkCardDTO(networkCard.getId().getIdNetworkCard(),networkCard.getMacAddress(),networkCard.getRj45IsConnected(),networkCard.getModel(),networkCard.getIsWireless());
+    }
+
+    private HardDiskDTO convertToHardDiskDTO(HardDisk hardDisk)
+    {
+        return new HardDiskDTO(hardDisk.getId().getSerialNumberHardDisk(),hardDisk.getSize(),hardDisk.getModel());
+    }
+
+    private GraphicCardDTO convertToGraphicCardDTO(GraphicCard graphicCard)
+    {
+        return new GraphicCardDTO(graphicCard.getId().getIdGraphicCard(), graphicCard.getModel());
+    }
+
+    private MotherboardDTO convertToMotherboardDTO(Motherboard motherboard)
+    {
+       return new MotherboardDTO(motherboard.getSerialNumber(),motherboard.getModel(),motherboard.getClassroom(),motherboard.getDescription(),motherboard.getProfessor(),motherboard.getLastConnection(),motherboard.getLastUpdateComputerOn(),motherboard.getComputerOn());
     }
 
     private CpuDTO convertToCpuDTO(Cpu cpu)

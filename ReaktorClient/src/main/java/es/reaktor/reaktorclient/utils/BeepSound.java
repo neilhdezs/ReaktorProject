@@ -7,6 +7,8 @@ import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.nio.file.Paths;
+import java.util.Locale;
 
 @Service
 public class BeepSound extends Thread
@@ -30,7 +32,8 @@ public class BeepSound extends Thread
     {
         try
         {
-            this.commandExecutor.executeCommand(getClass().getResource(".\\Debug\\net6.0\\BeepReaktor.exe").getPath());
+            String command = Paths.get("ReaktorClient/src/main/resources/Debug/net6.0/BeepReaktor.exe").toFile().getAbsolutePath();
+            this.commandExecutor.executeCommand(command);
         }
         catch (ReaktorClientException reaktorClientException)
         {

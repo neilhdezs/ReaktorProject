@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@EntityScan(basePackages = "es.reaktor.")
+@EntityScan(basePackages = "es.reaktor.models")
 public class ReaktorApplication
 {
     public static void main(String[] args)

@@ -4,7 +4,6 @@ import es.reaktor.models.DTO.SimpleComputerDTO;
 import es.reaktor.models.Malware;
 import es.reaktor.models.Motherboard;
 import es.reaktor.models.Reaktor;
-import es.reaktor.reaktor.reaktor_actions.MalwareService;
 import es.reaktor.reaktor.reaktor_actions.ReaktorActions;
 import es.reaktor.reaktor.reaktor_actions.ReaktorService;
 import es.reaktor.reaktor.repository.IMalwareRepository;
@@ -41,9 +40,6 @@ public class ReaktorServerRest
 
     @Autowired
     private ReaktorService reaktorService;
-
-    @Autowired
-    private MalwareService malwareService;
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/reaktor")
@@ -115,13 +111,16 @@ public class ReaktorServerRest
      * @param name malware name
      * @return Ok if the malware is created
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.DELETE, value = "/malware/{name}")
     public ResponseEntity<?> deleteMalware(
             @PathVariable String name
     )
     {
-        this.malwareService.deleteMalware(name);
+        Malware malware = this.iMalwareRepository.findById(name)
+            .orElseThrow(
+                    () -> new IllegalArgumentException("Malware with name " + name + " does not exist")
+            );
+        this.iMalwareRepository.delete(malware);
         return ResponseEntity.ok("Malware has been deleted");
     }
 

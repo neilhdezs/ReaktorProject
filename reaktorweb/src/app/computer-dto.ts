@@ -22,7 +22,7 @@ export interface ComputerDTO
 }
 
 
-export interface Motherboard {
+interface Motherboard {
   serialNumber: string;
   model: string;
   classroom: string;
@@ -33,44 +33,44 @@ export interface Motherboard {
   computerOn: boolean;
 }
 
-export interface Malware {
+interface Malware {
   name: string;
   description: string;
 }
 
-export interface Cpu {
+interface Cpu {
   cores: number;
   frequency: number;
   threads: number;
 }
 
-export interface GraphicCard {
+interface GraphicCard {
   model: string;
 }
 
-export interface HardDisk {
+interface HardDisk {
   size: number;
   model: string;
 }
 
-export interface InternetConnection {
+interface InternetConnection {
   networkName: string;
 }
 
-export interface NetworkCard {
+interface NetworkCard {
   macAddress: string;
   rj45IsConnected: string;
   model: string;
   isWireless: boolean;
 }
 
-export interface Partition {
+interface Partition {
   size: number;
   letter: string;
   operatingSystem: string;
 }
 
-export interface Ram {
+interface Ram {
   size: number;
   occupiedSlot: string;
   model: string;
@@ -78,7 +78,7 @@ export interface Ram {
   speed: number;
 }
 
-export interface SoundCard {
+interface SoundCard {
   model: string;
   driver: string;
 }

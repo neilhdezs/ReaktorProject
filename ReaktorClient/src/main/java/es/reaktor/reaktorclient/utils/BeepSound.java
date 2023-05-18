@@ -4,9 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 
+@Service
 public class BeepSound extends Thread
 {
 

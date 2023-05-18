@@ -1,5 +1,6 @@
 package es.reaktor.reaktor.rest;
 
+import es.reaktor.models.DTO.ReaktorDTO;
 import es.reaktor.models.DTO.SimpleComputerDTO;
 import es.reaktor.models.Malware;
 import es.reaktor.models.Motherboard;
@@ -155,7 +156,7 @@ public class ReaktorServerRest
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reaktor/{idComputer}")
-    public ResponseEntity<Reaktor> getReaktor(@PathVariable String idComputer )
+    public ResponseEntity<ReaktorDTO> getReaktor(@PathVariable String idComputer )
     {
         return ResponseEntity.ok(reaktorService.getInformationReaktor(idComputer));
     }

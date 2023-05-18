@@ -55,7 +55,7 @@ public class ReaktorService
         return simpleComputerDTOS;
     }
 
-    public Reaktor getInformationReaktor(String idComputer)
+    public ReaktorDTO getInformationReaktor(String idComputer)
     {
         CpuDTO cpu = this.convertToCpuDTO(this.iCpuRepository.findCpuById_Motherboard_SerialNumber(idComputer));
 

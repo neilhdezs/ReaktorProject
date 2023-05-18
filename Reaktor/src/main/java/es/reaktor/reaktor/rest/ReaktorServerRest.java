@@ -89,27 +89,19 @@ public class ReaktorServerRest
     @RequestMapping(method = RequestMethod.GET, value = "/malware")
     public List<Malware> getMalware()
     {
-        List<Malware> malwareList = this.iMalwareRepository.findAll();
-
-        return malwareList;
+        return this.iMalwareRepository.findAll();
     }
 
     /**
      * This Method is used to create a malware
-     * @param name malware name
-     * @param description malware description
      * @return Ok if the malware is created
      */
     @RequestMapping(method = RequestMethod.POST, value = "/malware")
     public ResponseEntity<?> createMalware(
-            @RequestHeader String name,
-            @RequestHeader String description
+            @RequestBody Malware newMalware
     )
     {
-        Malware malware = new Malware();
-        malware.setName(name);
-        malware.setDescription(description);
-        this.iMalwareRepository.save(malware);
+        this.iMalwareRepository.save(newMalware);
         return ResponseEntity.ok("Malware created");
     }
 
@@ -117,18 +109,17 @@ public class ReaktorServerRest
     /**
      * This Method is used to create a malware
      * @param name malware name
-     * @param description malware description
      * @return Ok if the malware is created
      */
-    @RequestMapping(method = RequestMethod.DELETE, value = "/malware")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/malware/{name}")
     public ResponseEntity<?> deleteMalware(
-            @RequestHeader String name,
-            @RequestHeader String description
+            @PathVariable String name
     )
     {
-        Malware malware = new Malware();
-        malware.setName(name);
-        malware.setDescription(description);
+        Malware malware = this.iMalwareRepository.findById(name)
+            .orElseThrow(
+                    () -> new IllegalArgumentException("Malware with name " + name + " does not exist")
+            );
         this.iMalwareRepository.delete(malware);
         return ResponseEntity.ok("Malware has been deleted");
     }

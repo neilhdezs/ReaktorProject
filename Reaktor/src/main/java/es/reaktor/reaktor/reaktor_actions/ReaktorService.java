@@ -1,6 +1,8 @@
 package es.reaktor.reaktor.reaktor_actions;
 
 import es.reaktor.models.*;
+import es.reaktor.models.DTO.CpuDTO;
+import es.reaktor.models.DTO.ReaktorDTO;
 import es.reaktor.models.DTO.SimpleComputerDTO;
 import es.reaktor.reaktor.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ReaktorService
@@ -64,32 +67,37 @@ public class ReaktorService
 
     public Reaktor getInformationReaktor(String idComputer)
     {
-        Cpu cpu = this.iCpuRepository.findCpuById_Motherboard_SerialNumber(idComputer);
+        CpuDTO cpu = this.convertToCpuDTO(this.iCpuRepository.findCpuById_Motherboard_SerialNumber(idComputer));
 
         Motherboard motherboard = this.iMotherboardRepository.findBySerialNumber(idComputer);
 
         List<GraphicCard> graphicCardList = this.iGraphicCardRepository.findAll()
-                .stream().filter(graphicCard -> graphicCard.getId().getMotherboard().getSerialNumber() == idComputer).toList();
+                .stream().filter(graphicCard -> Objects.equals(graphicCard.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
 
         List<HardDisk> hardDiskList = this.iHardDiskRepository.findAll()
-                .stream().filter(hardDisk -> hardDisk.getId().getMotherboard().getSerialNumber() == idComputer).toList();
+                .stream().filter(hardDisk -> Objects.equals(hardDisk.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
 
         List<NetworkCard> networkCardList = this.iNetworkCardRepository.findAll()
-                .stream().filter(networkCard -> networkCard.getId().getMotherboard().getSerialNumber() == idComputer).toList();
+                .stream().filter(networkCard -> Objects.equals(networkCard.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
 
         List<Ram> ramList = this.iRamRepository.findAll()
-                .stream().filter(ram -> ram.getId().getMotherboard().getSerialNumber() == idComputer).toList();
+                .stream().filter(ram -> Objects.equals(ram.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
 
         List<SoundCard> soundCardList = this.iSoundCardRepository.findAll()
-                .stream().filter(soundCard -> soundCard.getId().getMotherboard().getSerialNumber() == idComputer).toList();
+                .stream().filter(soundCard -> Objects.equals(soundCard.getId().getMotherboard().getSerialNumber(), idComputer)).toList();
 
         List<Partition> partitionList = this.iPartitionRepository.findAll()
-                .stream().filter(partition -> partition.getId().getHardDisk().getId().getMotherboard().getSerialNumber() == idComputer).toList();
+                .stream().filter(partition -> Objects.equals(partition.getId().getHardDisk().getId().getMotherboard().getSerialNumber(), idComputer)).toList();
 
         List<Malware> malwareList = this.iMotherboardMalwareRepository.findAll()
-                .stream().filter(motherboardMalware -> motherboardMalware.getSerialNumber().getSerialNumber() == idComputer).toList()
+                .stream().filter(motherboardMalware -> Objects.equals(motherboardMalware.getSerialNumber().getSerialNumber(), idComputer)).toList()
                 .stream().map(MotherboardMalware::getName).toList();
 
-        return new Reaktor(motherboard,malwareList,cpu,graphicCardList,hardDiskList,networkCardList,partitionList,ramList,soundCardList);
+        return new ReaktorDTO(motherboard,malwareList,cpu,graphicCardList,hardDiskList,networkCardList,partitionList,ramList,soundCardList);
+    }
+
+    private CpuDTO convertToCpuDTO(Cpu cpu)
+    {
+        return new CpuDTO(cpu.getId().getIdCpu(), cpu.getCores(), cpu.getFrequency(), cpu.getThreads());
     }
 }

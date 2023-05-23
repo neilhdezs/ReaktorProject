@@ -119,11 +119,7 @@ public class ReaktorServerRest
             @PathVariable String name
     )
     {
-        Malware malware = this.iMalwareRepository.findById(name)
-            .orElseThrow(
-                    () -> new IllegalArgumentException("Malware with name " + name + " does not exist")
-            );
-        this.iMalwareRepository.delete(malware);
+        this.reaktorService.deleteMalware(name);
         return ResponseEntity.ok("Malware has been deleted");
     }
 

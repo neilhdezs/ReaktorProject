@@ -2,6 +2,7 @@ package es.reaktor.reaktor.reaktor_actions;
 
 import es.reaktor.models.*;
 import es.reaktor.models.DTO.*;
+import es.reaktor.models.Id.MotherboardMalwareId;
 import es.reaktor.reaktor.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,11 @@ public class ReaktorService
 
     @Autowired
     private IPartitionRepository iPartitionRepository;
+
+    @Autowired
+    private IMalwareRepository iMalwareRepository;
+
+
 
     public List<SimpleComputerDTO> getSimpleComputerDTO()
     {
@@ -139,4 +145,24 @@ public class ReaktorService
     {
         return new CpuDTO(cpu.getId().getIdCpu(), cpu.getCores(), cpu.getFrequency(), cpu.getThreads());
     }
+
+
+    public void deleteMalware(String idMalware)
+    {
+        Malware malwareRemove = this.iMalwareRepository.findById(idMalware).orElseThrow(
+                () -> new IllegalArgumentException("Invalid malware Id:" + idMalware)
+        );
+
+        List<String> motherboardMalwareIdList = this.iMotherboardMalwareRepository.findIdMotherboardOfMalware(idMalware);
+
+        for (String id : motherboardMalwareIdList)
+        {
+            Motherboard motherboard = this.iMotherboardRepository.findBySerialNumber(id);
+            motherboard.getMalware().remove(new MotherboardMalware(new MotherboardMalwareId(idMalware, id), malwareRemove, motherboard));
+        }
+
+        this.iMalwareRepository.delete(malwareRemove);
+    }
+
+
 }

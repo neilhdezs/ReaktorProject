@@ -16,37 +16,5 @@ export class PrincipalComponent implements OnInit {
     this.http.get<SimpleComputerDTO[]>('http://localhost:8084/computer').subscribe(data => {
       this.computers = data;
     });
-
-    this.computers = [
-      {
-        malwareCount: 1,
-        id: "1",
-        location: "miCasa",
-        responsable: "Yo",
-        computerOn: true
-      },
-      {
-        malwareCount: 1,
-        id: "1",
-        location: "miCasa",
-        responsable: "Yo",
-        computerOn: false
-      },
-      {
-        malwareCount: 1,
-        id: "1",
-        location: "miCasa",
-        responsable: "Yo",
-        computerOn: true
-      },
-      {
-        malwareCount: 1,
-        id: "1",
-        location: "miCasa",
-        responsable: "Yo",
-        computerOn: true
-      }
-    ]
-
   }
 }

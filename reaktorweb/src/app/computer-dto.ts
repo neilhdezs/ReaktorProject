@@ -9,16 +9,16 @@ export interface SimpleComputerDTO
 
 export interface ComputerDTO
 {
-  motherbard: Motherboard;
-  malware: Malware[];
-  cpu: Cpu;
-  graphicCard: GraphicCard[];
-  hardDisk: HardDisk[];
-  internetConnection: InternetConnection;
-  networkCard: NetworkCard[];
-  partition: Partition[];
-  ram: Ram[];
-  soundCard: SoundCard[];
+  motherboardDTO: Motherboard;
+  malwareDTO: Malware[];
+  cpuDTO: Cpu;
+  graphicCardDTO: GraphicCard[];
+  hardDiskDTO: HardDisk[];
+  internetConnectionDTO: InternetConnection;
+  networkCardDTO: NetworkCard[];
+  partitionDTO: Partition[];
+  ramDTO: Ram[];
+  soundCardDTO: SoundCard[];
 }
 
 
@@ -72,7 +72,7 @@ export interface Partition {
 
 export interface Ram {
   size: number;
-  occupiedSlot: string;
+  occupiedSlots: string;
   model: string;
   type: string;
   speed: number;

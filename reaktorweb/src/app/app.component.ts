@@ -7,14 +7,6 @@ import { SimpleComputerDTO } from './computer-dto';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  computers?: SimpleComputerDTO[];
+export class AppComponent {
 
-  constructor(private http: HttpClient) { }
-
-  ngOnInit(): void {
-    this.http.get<SimpleComputerDTO[]>('ruta-a-tu-api').subscribe(data => {
-      this.computers = data;
-    });
-  }
 }

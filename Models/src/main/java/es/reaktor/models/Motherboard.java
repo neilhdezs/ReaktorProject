@@ -73,6 +73,12 @@ public class Motherboard
     private Boolean computerOn;
 
     /**
+     * Attribute - is admin
+     */
+    @Column(nullable = false)
+    private Boolean isAdmin;
+
+    /**
      * Attribute - Malware
      */
     @OneToMany(mappedBy = "serialNumber", cascade = CascadeType.ALL)

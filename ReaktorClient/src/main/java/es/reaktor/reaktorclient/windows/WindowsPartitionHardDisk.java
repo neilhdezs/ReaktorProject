@@ -99,7 +99,7 @@ public class WindowsPartitionHardDisk
 
     private Long getSize(HWPartition partition)
     {
-        return partition.getSize()/1024/1024;
+        return partition.getSize()/1024/1024/1024;
     }
 
 }

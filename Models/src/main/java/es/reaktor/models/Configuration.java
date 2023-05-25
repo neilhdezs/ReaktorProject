@@ -25,6 +25,12 @@ public class Configuration
     private String description;
 
     /**
+     * - ATTRIBUTES -
+     * This attributes are used to create the configuration of the admin
+     */
+    private Boolean isAdmin;
+
+    /**
      * - CONSTRUCTOR BY DEFAULT -
      * This constructor is used to create the configuration of the classroom by default
      */
@@ -44,6 +50,14 @@ public class Configuration
         this.classroom = classroom;
         this.professor = professor;
         this.description = description;
+    }
+
+    public Configuration(String classroom, String professor, String description, Boolean isAdmin)
+    {
+        this.classroom = classroom;
+        this.professor = professor;
+        this.description = description;
+        this.isAdmin = isAdmin;
     }
 
     /**
@@ -109,5 +123,25 @@ public class Configuration
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    /**
+     * - METHOD GET -
+     * This method is used to get the admin of the configuration
+     * @return
+     */
+    public Boolean getIsAdmin()
+    {
+        return isAdmin;
+    }
+
+    /**
+     * - METHOD SET -
+     * This method is used to set the admin of the configuration
+     * @param iSadmin
+     */
+    public void setIsAdmin(Boolean iSadmin)
+    {
+        this.isAdmin = iSadmin;
     }
 }

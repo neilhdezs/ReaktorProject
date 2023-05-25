@@ -38,11 +38,13 @@ public class ReadFiles
         Configuration configuration = null;
         try
         {
-            configuration = mapper.readValue(this.readFileConfiguration(), new TypeReference<Configuration>(){});
+            configuration = mapper.readValue(this.readFileConfiguration(), new TypeReference<>()
+            {
+            });
         } catch (JsonProcessingException jsonProcessingException)
         {
             jsonProcessingException.printStackTrace();
-            configuration = new Configuration("unknow", "unknow", "unknow");
+            configuration = new Configuration("unknow", "unknow", "unknow", false);
         }
 
         return configuration;

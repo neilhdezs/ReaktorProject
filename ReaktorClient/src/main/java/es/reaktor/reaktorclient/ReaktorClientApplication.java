@@ -65,6 +65,7 @@ public class ReaktorClientApplication implements CommandLineRunner
 
     public static void main(String[] args) throws InterruptedException
     {
+
         // This attribute is used to check the arguments of the application
         CheckerArguments checkerArguments = new CheckerArguments();
 

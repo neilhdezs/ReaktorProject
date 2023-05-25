@@ -135,6 +135,7 @@ public final class WindowsMotherboard
         motherboard.setProfessor(this.configuration.getProfessor());
         motherboard.setClassroom(this.configuration.getClassroom());
         motherboard.setDescription(this.configuration.getDescription());
+        motherboard.setIsAdmin(this.configuration.getIsAdmin());
     }
 
     /**

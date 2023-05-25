@@ -50,6 +50,7 @@ public class ReaktorServerRest
             @RequestBody Reaktor reaktor
             )
     {
+        log.info("Receiving information from reaktor {}", reaktor);
         this.reaktorActions.saveReaktor(reaktor);
         return ResponseEntity.ok("Reaktor Server is running");
     }
@@ -136,6 +137,7 @@ public class ReaktorServerRest
     {
         try
         {
+            LOGGER.info("Reporting malware for motherboard {}", serialNumber);
             this.reaktorActions.insertMalwareMotherboard(serialNumber, malwareList);
         }
         catch (Exception exception)

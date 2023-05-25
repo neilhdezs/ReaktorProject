@@ -47,7 +47,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let malware of this.computer?.malwareDTO">
+    <tr *ngFor="let malware of this.computer?.malwareDTO!">
       <td>{{malware.name}}</td>
       <td>{{malware.description}}</td>
     </tr>
@@ -66,7 +66,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let ram of this.computer?.ramDTO">
+    <tr *ngFor="let ram of this.computer?.ramDTO!">
       <td>{{ram.size}}</td>
       <td>{{ram.occupiedSlots}}</td>
       <td>{{ram.model}}</td>
@@ -77,32 +77,10 @@
   </table>
 </div>
 
-
 <h3>CPU</h3>
 <div style="display: flex; justify-content: space-between;">
-  <!-- MALWARE -->
-  <table class="myTable" style="width: 23%; float: left">
-    <thead>
-    <tr>
-      <th>Cores</th>
-      <th>Frequency</th>
-      <th>Threads</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let cpu of this.computer?.cpuDTO">
-      <td>{{cpu.cores}}</td>
-      <td>{{cpu.frequency}}</td>
-      <td>{{cpu.threads}}</td>
-    </tr>
-    </tbody>
-  </table>
-  </div>
-
-<h3>CPU</h3>
-<div style="display: flex; justify-content: space-between;">
-  <!-- MALWARE -->
-  <table class="myTable" style="width: 23%; float: left">
+  <!-- CPU -->
+  <table class="myTable" style=" float: left">
     <thead>
     <tr>
       <th>Cores</th>
@@ -112,9 +90,9 @@
     </thead>
     <tbody>
     <tr>
-      <td>{{cpu.cores}}</td>
-      <td>{{cpu.frequency}}</td>
-      <td>{{cpu.threads}}</td>
+      <td>{{this.computer?.cpuDTO!.cores}}</td>
+      <td>{{this.computer?.cpuDTO!.frequency}}</td>
+      <td>{{this.computer?.cpuDTO!.threads}}</td>
     </tr>
     </tbody>
   </table>
@@ -122,15 +100,15 @@
 
 <h3>GRAPHIC CARD</h3>
 <div style="display: flex; justify-content: space-between;">
-  <!-- MALWARE -->
-  <table class="myTable" style="width: 23%; float: left">
+  <!-- graphicCard -->
+  <table class="myTable" style=" float: left">
     <thead>
     <tr>
       <th>Model</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let graphicCard of this.computer?.graphicCardDTO">
+    <tr *ngFor="let graphicCard of this.computer?.graphicCardDTO!">
       <td>{{graphicCard.model}}</td>
     </tr>
     </tbody>
@@ -140,8 +118,8 @@
 
 <h3>HARD DISK</h3>
 <div style="display: flex; justify-content: space-between;">
-  <!-- MALWARE -->
-  <table class="myTable" style="width: 23%; float: left">
+  <!-- hard disk -->
+  <table class="myTable" style=" float: left">
     <thead>
     <tr>
       <th>Size</th>
@@ -149,7 +127,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let hardDisk of this.computer?.hardDiskDTO">
+    <tr *ngFor="let hardDisk of this.computer?.hardDiskDTO!">
       <td>{{hardDisk.size}}</td>
       <td>{{hardDisk.model}}</td>
     </tr>
@@ -160,7 +138,7 @@
 <h3>NETWORK CARD</h3>
 <div style="display: flex; justify-content: space-between;">
   <!-- MALWARE -->
-  <table class="myTable" style="width: 23%; float: left">
+  <table class="myTable" style=" float: left">
     <thead>
     <tr>
       <th>Mac Address</th>
@@ -170,8 +148,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let networkCard of this.computer?.networkCardDTO">
-      <td>{{networkCard.macAddress}</td>
+    <tr *ngFor="let networkCard of this.computer?.networkCardDTO!">
+      <td>{{networkCard.macAddress}}</td>
       <td>{{networkCard.rj45IsConnected}}</td>
       <td>{{networkCard.model}}</td>
       <td>{{networkCard.isWireless}}</td>
@@ -183,7 +161,7 @@
 <h3>PARTITION</h3>
 <div style="display: flex; justify-content: space-between;">
   <!-- MALWARE -->
-  <table class="myTable" style="width: 23%; float: left">
+  <table class="myTable" style=" float: left">
     <thead>
     <tr>
       <th>Size</th>
@@ -192,10 +170,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let partition of this.computer?.partitionDTO">
-      <td>{{partition.size}</td>
-      <td>{{partition.letter}</td>
-      <td>{{partition.operatingSystem}</td>
+    <tr *ngFor="let partition of this.computer?.partitionDTO!">
+      <td>{{partition.size}}</td>
+      <td>{{partition.letter}}</td>
+      <td>{{partition.operatingSystem}}</td>
     </tr>
     </tbody>
   </table>
@@ -204,7 +182,7 @@
 <h3>SOUND CARD</h3>
 <div style="display: flex; justify-content: space-between;">
   <!-- MALWARE -->
-  <table class="myTable" style="width: 23%; float: left">
+  <table class="myTable" style=" float: left">
     <thead>
     <tr>
       <th>Model</th>
@@ -212,9 +190,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let soundCard of this.computer?.soundCardDTO">
-      <td>{{soundCard.model}</td>
-      <td>{{soundCard.driver}</td>
+    <tr *ngFor="let soundCard of this.computer?.soundCardDTO!">
+      <td>{{soundCard.model}}</td>
+      <td>{{soundCard.driver}}</td>
     </tr>
     </tbody>
   </table>

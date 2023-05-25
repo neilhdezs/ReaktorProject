@@ -1,13 +1,15 @@
 package es.reaktor.reaktorclient.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import es.reaktor.models.Configuration;
 import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * - CLASS -
@@ -22,6 +24,7 @@ public class ActionsArguments
 
     /**
      * This method is used to execute the action of the arguments
+     *
      * @param args Arguments of the command line
      */
     public void actionArguments(String[] args) throws ReaktorClientException
@@ -32,12 +35,6 @@ public class ActionsArguments
             return;
         }
 
-        // If the first argument is help, we execute the help command
-        if (args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS))
-        {
-            actionHelp();
-            return;
-        }
 
         // If the first argument is "-a" or "-p" we execute the action
         writeConfiguration(args);
@@ -45,11 +42,10 @@ public class ActionsArguments
     }
 
 
-
     private void writeConfiguration(String[] args) throws ReaktorClientException
     {
 
-        Map<String, String> argumentsContent =  obtainsArguments(args);
+        Map<String, String> argumentsContent = obtainsArguments(args);
 
         Configuration configuration = createConfiguration(argumentsContent);
 
@@ -79,6 +75,7 @@ public class ActionsArguments
 
     /**
      * This method is used to obtain the arguments and the content of the arguments
+     *
      * @param args Arguments of the command line
      * @return Map with the arguments and the content of the arguments
      */
@@ -114,7 +111,8 @@ public class ActionsArguments
 
     /**
      * This method is used to check the content of the arguments
-     * @param argsList List of arguments
+     *
+     * @param argsList              List of arguments
      * @param entryOptionsArguments List of options arguments and indices
      */
     private Map<String, String> extractedInformationOfArguments(List<String> argsList, List<Map.Entry<String, Integer>> entryOptionsArguments)
@@ -173,40 +171,30 @@ public class ActionsArguments
         {
             configuration.setDescription(argsAllContent.get(Constants.DESCRIPTION_PARAMETERS));
         }
+
+        if (argsAllContent.containsKey(Constants.IS_ADMIN_PARAMETERS))
+        {
+            configuration.setIsAdmin(true);
+        } else
+        {
+            configuration.setIsAdmin(false);
+        }
         return configuration;
     }
 
     /**
      * This method is used to extract the arguments and the content of the arguments
+     *
      * @param argsContent Map with the options arguments and the index of the arguments
-     * @param argsList List with the all arguments
+     * @param argsList    List with the all arguments
      */
     private void checkerContentArguments(List<Map.Entry<String, Integer>> argsContent, List<String> argsList)
     {
-        // if only one parameter
-        if (argsContent.size() <= 1)
+        // loop to check if the arguments content is empty
+        for (int i = 0; i < argsContent.size() - 1; i++)
         {
-            // if the only one argument
-            if (argsList.size()<= 1)
-            {
-                // no arguments found
-                throw new IllegalArgumentException(ConstantsErrors.ERROR_ARGUMENTS_NOT_FOUND);
-            }
-        }
-        // if more than one parameter
-        else
-        {
-            // loop to check if the arguments content is empty
-            for (int i = 0; i < argsContent.size() - 1; i++)
-            {
-                // if the index current argument options, is equal to the next index argument options
-                if (argsContent.get(i).getValue() + 1 == argsContent.get(i + 1).getValue())
-                {
-                    throw new IllegalArgumentException(ConstantsErrors.ERROR_ARGUMENTS_NOT_FOUND);
-                }
-            }
-            // As it is possible that it has no more arguments, we check if the index of the option is the last one, i.e. it has no more arguments.
-            if (argsContent.get(argsContent.size() - 1).getValue().equals(argsList.size() - 1))
+            // if the index current argument options, is equal to the next index argument options
+            if (argsContent.get(i).getValue() + 1 == argsContent.get(i + 1).getValue())
             {
                 throw new IllegalArgumentException(ConstantsErrors.ERROR_ARGUMENTS_NOT_FOUND);
             }
@@ -215,7 +203,8 @@ public class ActionsArguments
 
     /**
      * This method is used to extract the arguments and the index of the arguments
-     * @param arguments Arguments of the command line
+     *
+     * @param arguments  Arguments of the command line
      * @param argsIndice Map for storage the arguments and the index of the arguments
      */
     private static void extractedArguments(List<String> arguments, Map<String, Integer> argsIndice)
@@ -238,14 +227,15 @@ public class ActionsArguments
             // we add the argument and the index of the argument
             argsIndice.put(arguments.get(arguments.indexOf(Constants.DESCRIPTION_PARAMETERS)), arguments.indexOf(Constants.DESCRIPTION_PARAMETERS));
         }
+
+        // if contains the argument "-admin"
+        if (arguments.contains(Constants.IS_ADMIN_PARAMETERS))
+        {
+            // we add the argument and the index of the argument
+            argsIndice.put(arguments.get(arguments.indexOf(Constants.IS_ADMIN_PARAMETERS)), arguments.indexOf(Constants.IS_ADMIN_PARAMETERS));
+        }
     }
 
-    /**
-     * This method is used to print the help of the command line
-     */
-    public void actionHelp()
-    {
-        System.out.println(Constants.HELP_COMMAND_OUTPUT);
-    }
+
 
 }

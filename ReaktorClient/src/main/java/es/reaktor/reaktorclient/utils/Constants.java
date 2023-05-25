@@ -40,6 +40,7 @@ public class Constants
     public static final String CLASSROOM_PARAMETERS /*...........*/ = "-a";
     public static final String DESCRIPTION_PARAMETERS /*.........*/ = "-d";
     public static final String PROFESSOR_PARAMETERS /*...........*/ = "-p";
+    public static final String IS_ADMIN_PARAMETERS /*............*/ = "-admin";
 
     /**
      * - PATH FILES -
@@ -70,6 +71,8 @@ public class Constants
             -a: Enter the classroom parameter
         
             -p: Enter the professor parameter
+            
+            -admin: Enter the admin parameter
         
         
             the parameter -d is optional, it can be used with the other parameters
@@ -79,9 +82,10 @@ public class Constants
             
             Example: "java -jar ReaktorClient.jar -h" For Help In The Application
             Example: "java -jar ReaktorClient.jar -a 2.11" For Enter The Classroom Parameter
-            Example: "java -jar ReaktorClient.jar -p Cayetano" For Enter The Professor Parameter
-            Example: "java -jar ReaktorClient.jar -a 2.11 -p Cayetano" For Enter The Classroom And Professor Parameter
+            Example: "java -jar ReaktorClient.jar -p Cayetano" For Enter The Professor Parameter -admin
+            Example: "java -jar ReaktorClient.jar -a 2.11 -p Cayetano" For Enter The Classroom And Professor Parameter 
             Example: "java -jar ReaktorClient.jar -a 2.11 -p Cayetano -d Second row, right-hand side second computer from the centre" For Enter The Classroom, Professor And Description Location Parameter
+            Example: "java -jar ReaktorClient.jar -a 2.11 -p Cayetano -d Second row, right-hand side second computer from the centre" For Enter The Classroom, Professor And Description Location Parameter -admin
         """;
 
 }

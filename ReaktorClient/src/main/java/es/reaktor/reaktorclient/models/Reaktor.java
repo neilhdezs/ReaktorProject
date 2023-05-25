@@ -108,8 +108,11 @@ public class Reaktor
         // We get the information of the motherboard
         this.motherboard = this.windowsMotherboard.getMotherboard();
 
-        // We get the information of the malware
-        this.malware = this.windowsMalware.getMalwareListInThisPc();
+        if (!this.motherboard.getIsAdmin())
+        {
+            // We get the information of the malware
+            this.malware = this.windowsMalware.getMalwareListInThisPc();
+        }
 
         // We get the information of the sound card
         this.soundCard = this.windowsSoundCard.getSoundsCard(this.motherboard);

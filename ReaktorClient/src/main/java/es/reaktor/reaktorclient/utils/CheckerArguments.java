@@ -17,6 +17,14 @@ public class CheckerArguments
      */
     public boolean checkArguments(String[] args)
     {
+
+        // If the first argument is help, we execute the help command
+        if (args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS))
+        {
+            actionHelp();
+            System.exit(0);
+        }
+
         // if the length is correct and the content is correct and the repetitions are correct and the obligations are correct
         return checkContent(args) && checkRepetitions(args) && checkObligations(args);
     }
@@ -36,6 +44,7 @@ public class CheckerArguments
             // if the argument is -h and not contains more arguments
             if (args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS) && args.length == 1)
             {
+
                 return true;
             }
             // In case of not contains -h in the first arguments check the rest of the arguments that are not -h
@@ -52,8 +61,8 @@ public class CheckerArguments
 
             for (String arg : args)
             {
-                // if the argument is not -a or -p or -d
-                if (!arg.equalsIgnoreCase(Constants.CLASSROOM_PARAMETERS) && !arg.equalsIgnoreCase(Constants.PROFESSOR_PARAMETERS) && !arg.equalsIgnoreCase(Constants.DESCRIPTION_PARAMETERS) && !arg.equalsIgnoreCase(Constants.HELP_PARAMETERS))
+                // if the argument is not -a or -p or -d or -admin
+                if (!arg.equalsIgnoreCase(Constants.CLASSROOM_PARAMETERS) && !arg.equalsIgnoreCase(Constants.PROFESSOR_PARAMETERS) && !arg.equalsIgnoreCase(Constants.DESCRIPTION_PARAMETERS) && !arg.equalsIgnoreCase(Constants.HELP_PARAMETERS) && !arg.equalsIgnoreCase(Constants.IS_ADMIN_PARAMETERS))
                 {
                     // if the argument is not a number
                     if (!arg.matches("[0-9]+"))
@@ -124,11 +133,20 @@ public class CheckerArguments
         if (args.length > 0)
         {
             // if the first argument is not -a or -p or -h return false
-            if (!args[0].equalsIgnoreCase(Constants.CLASSROOM_PARAMETERS) && !args[0].equalsIgnoreCase(Constants.PROFESSOR_PARAMETERS) && !args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS))
+            if (!args[0].equalsIgnoreCase(Constants.CLASSROOM_PARAMETERS) && !args[0].equalsIgnoreCase(Constants.PROFESSOR_PARAMETERS) && !args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS) && !args[0].equalsIgnoreCase(Constants.DESCRIPTION_PARAMETERS) && !args[0].equalsIgnoreCase(Constants.IS_ADMIN_PARAMETERS))
             {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * This method is used to print the help of the command line
+     */
+    public void actionHelp()
+    {
+        System.out.println(Constants.HELP_COMMAND_OUTPUT);
+        System.exit(0);
     }
 }

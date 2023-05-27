@@ -29,16 +29,8 @@ public class ActionsArguments
      */
     public void actionArguments(String[] args) throws ReaktorClientException
     {
-        // If the arguments are null, we return and execute normal
-        if (args.length == 0)
-        {
-            return;
-        }
-
-
         // If the first argument is "-a" or "-p" we execute the action
         writeConfiguration(args);
-
     }
 
 
@@ -70,6 +62,11 @@ public class ActionsArguments
         if (configuration.getDescription() == null || configuration.getDescription().isEmpty())
         {
             configuration.setDescription(Constants.UNKNOWN);
+        }
+
+        if (configuration.getIsAdmin() == null)
+        {
+            configuration.setIsAdmin(false);
         }
     }
 
@@ -122,7 +119,7 @@ public class ActionsArguments
 
         List<String> content;
         // Si solo tiene un argumento
-        if (entryOptionsArguments.size() <= 1) // Es decir que tiene un argumento
+        if (entryOptionsArguments.size() == 1)
         {
             // Si el argumento es el primero, cogemos el contenido desde el siguiente indice hasta el final
             content = argsList.subList(entryOptionsArguments.get(0).getValue() + 1, argsList.size());
@@ -131,7 +128,7 @@ public class ActionsArguments
             argsAllContent.put(entryOptionsArguments.get(0).getKey(), String.join(" ", content));
         }
         // Si tiene mas de un argumento
-        else
+        else if (entryOptionsArguments.size() > 1)
         {
             // Recorremos la lista de argumentos
             for (int i = 0; i < entryOptionsArguments.size() - 1; i++)

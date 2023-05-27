@@ -56,7 +56,8 @@ public class Constants
         HELP_PARAMETERS, // -h
         CLASSROOM_PARAMETERS, // -a
         DESCRIPTION_PARAMETERS, // -d
-        PROFESSOR_PARAMETERS // -p
+        PROFESSOR_PARAMETERS, // -p
+        IS_ADMIN_PARAMETERS // -admin
     };
 
     /**

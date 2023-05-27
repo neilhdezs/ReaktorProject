@@ -17,16 +17,19 @@ public class CheckerArguments
      */
     public boolean checkArguments(String[] args)
     {
+        // if the length is correct and the content is correct and the repetitions are correct and the obligations are correct
+        boolean result = checkContent(args) && checkRepetitions(args) && checkObligations(args);
 
-        // If the first argument is help, we execute the help command
-        if (args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS))
+        if (args.length > 0)
         {
-            actionHelp();
-            System.exit(0);
+            // if the argument is -h and not contains more arguments
+            if (args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS) && args.length == 1)
+            {
+                this.actionHelp();
+            }
         }
 
-        // if the length is correct and the content is correct and the repetitions are correct and the obligations are correct
-        return checkContent(args) && checkRepetitions(args) && checkObligations(args);
+        return result;
     }
 
 
@@ -44,7 +47,6 @@ public class CheckerArguments
             // if the argument is -h and not contains more arguments
             if (args[0].equalsIgnoreCase(Constants.HELP_PARAMETERS) && args.length == 1)
             {
-
                 return true;
             }
             // In case of not contains -h in the first arguments check the rest of the arguments that are not -h

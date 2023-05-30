@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SimpleComputerDTO } from './computer-dto';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',

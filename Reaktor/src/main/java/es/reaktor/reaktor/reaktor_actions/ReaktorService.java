@@ -56,7 +56,7 @@ public class ReaktorService
         {
             Long malwareCount = this.iMotherboardMalwareRepository.countByMotherboardMalwareId_SerialNumber(motherboard.getSerialNumber());
 
-            simpleComputerDTOS.add(new SimpleComputerDTO(motherboard.getSerialNumber(), malwareCount, motherboard.getClassroom(), motherboard.getProfessor(), motherboard.getComputerOn()));
+            simpleComputerDTOS.add(new SimpleComputerDTO(motherboard.getSerialNumber(), malwareCount, motherboard.getClassroom(), motherboard.getProfessor(), motherboard.getComputerOn(), motherboard.getIsAdmin()));
         }
         return simpleComputerDTOS;
     }

@@ -21,6 +21,7 @@ public class MessageSender extends Thread
     public MessageSender(CommandExecutor commandExecutor, String message)
     {
         this.commandExecutor = commandExecutor;
+
         this.message = "msg * /self /w \""+ message +  "\"\n";
     }
 

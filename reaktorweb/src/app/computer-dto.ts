@@ -5,6 +5,7 @@ export interface SimpleComputerDTO
   location: string;
   responsable: string;
   computerOn: boolean;
+  isAdmin: boolean;
 }
 
 export interface ComputerDTO
@@ -19,6 +20,7 @@ export interface ComputerDTO
   partitionDTO: Partition[];
   ramDTO: Ram[];
   soundCardDTO: SoundCard[];
+  isAdmin: boolean;
 }
 
 

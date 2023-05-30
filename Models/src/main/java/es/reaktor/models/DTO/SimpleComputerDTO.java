@@ -20,4 +20,6 @@ public class SimpleComputerDTO
     private String responsable;
 
     private Boolean computerOn;
+
+    private Boolean isAdmin;
 }

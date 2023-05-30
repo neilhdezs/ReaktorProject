@@ -90,10 +90,8 @@ public class ReaktorClientApplication implements CommandLineRunner
             this.actionsArguments.actionArguments(args);
             
             // Send the update information to Server REAKTOR
-            LOGGER.info(this.httpCommunicationSender.sendPost(this.httpCommunicationSender.createHttpPostReaktor(this.reaktorServerUrl+"/reaktor", this.reaktor)));
-            
-            // Show in terminal de information about the machine
-            LOGGER.info(reaktor);
+            LOGGER.info("Sending information to server REAKTOR");
+            this.httpCommunicationSender.sendPost(this.httpCommunicationSender.createHttpPostReaktor(this.reaktorServerUrl+"/reaktor", this.reaktor));
 
         }
         catch (ReaktorClientException reaktorClientException)

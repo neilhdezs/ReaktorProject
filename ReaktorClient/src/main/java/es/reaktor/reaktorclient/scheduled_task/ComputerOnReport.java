@@ -32,7 +32,7 @@ public class ComputerOnReport
     @Value("${reaktor.server.url}")
     private String reaktorServerUrl;
 
-    @Scheduled(fixedRate = 10_000)
+    @Scheduled(fixedDelayString = "${reaktor.computerOnReport}", initialDelay = 2000)
     public void computerOnReport()
     {
         try

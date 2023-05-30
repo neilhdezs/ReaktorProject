@@ -39,14 +39,12 @@ public class WindowsCpu
         cpu.setFrequency(this.getFrequency());
         cpu.setThreads(this.getThreads());
         cpu.setId(this.getCpuId(motherboard));
-        LOGGER.info("CPU INFO OBTAINED");
         return cpu;
     }
 
     private CpuId getCpuId(Motherboard motherboard)
     {
-        CpuId cpuId = new CpuId(this.windowsHardwareAbstractionLayer.getProcessor().getProcessorIdentifier().getProcessorID(), motherboard);
-        return cpuId;
+        return new CpuId(this.windowsHardwareAbstractionLayer.getProcessor().getProcessorIdentifier().getProcessorID(), motherboard);
     }
 
     private Integer getThreads()

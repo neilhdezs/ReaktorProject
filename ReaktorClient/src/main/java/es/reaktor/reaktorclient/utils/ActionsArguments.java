@@ -98,7 +98,7 @@ public class ActionsArguments
         entryArrayList.sort(Map.Entry.comparingByValue());
 
         // Check if the arguments content is correct
-        checkerContentArguments(entryArrayList, argsList);
+        checkerContentArguments(entryArrayList);
 
         // Extract the content of the arguments
         argsAllContent = extractedInformationOfArguments(argsList, entryArrayList);
@@ -171,11 +171,9 @@ public class ActionsArguments
 
         if (argsAllContent.containsKey(Constants.IS_ADMIN_PARAMETERS))
         {
-            configuration.setIsAdmin(true);
-        } else
-        {
-            configuration.setIsAdmin(false);
+            configuration.setIsAdmin(Boolean.parseBoolean(argsAllContent.get(Constants.IS_ADMIN_PARAMETERS)));
         }
+
         return configuration;
     }
 
@@ -183,9 +181,8 @@ public class ActionsArguments
      * This method is used to extract the arguments and the content of the arguments
      *
      * @param argsContent Map with the options arguments and the index of the arguments
-     * @param argsList    List with the all arguments
      */
-    private void checkerContentArguments(List<Map.Entry<String, Integer>> argsContent, List<String> argsList)
+    private void checkerContentArguments(List<Map.Entry<String, Integer>> argsContent)
     {
         // loop to check if the arguments content is empty
         for (int i = 0; i < argsContent.size() - 1; i++)

@@ -1,4 +1,5 @@
 package es.reaktor.models;
+
 /**
  * - CLASS -
  * This class is used to create the configuration of the classroom
@@ -45,13 +46,6 @@ public class Configuration
      * @param professor Professor of the configuration
      * @param description Description of the configuration
      */
-    public Configuration(String classroom, String professor, String description)
-    {
-        this.classroom = classroom;
-        this.professor = professor;
-        this.description = description;
-    }
-
     public Configuration(String classroom, String professor, String description, Boolean isAdmin)
     {
         this.classroom = classroom;

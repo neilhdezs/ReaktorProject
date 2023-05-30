@@ -9,3 +9,7 @@ spring:
       maximum-pool-size: 5
 server:
   port: 8084
+
+reaktor:
+  cronComputerOn: 5_000
+  cronComputerOnDifference: 7_000

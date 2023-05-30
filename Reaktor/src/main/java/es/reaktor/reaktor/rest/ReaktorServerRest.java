@@ -1,5 +1,6 @@
 package es.reaktor.reaktor.rest;
 
+import es.reaktor.models.DTO.MalwareDTOWeb;
 import es.reaktor.models.DTO.ReaktorDTO;
 import es.reaktor.models.DTO.SimpleComputerDTO;
 import es.reaktor.models.Malware;
@@ -94,6 +95,16 @@ public class ReaktorServerRest
     public List<Malware> getMalware()
     {
         return this.iMalwareRepository.findAll();
+    }
+
+    /**
+     * This Method is used to obtain the malware list for Web
+     * @return the malware list for Web
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/malware-web")
+    public List<MalwareDTOWeb> getMalwareWeb()
+    {
+        return this.reaktorService.getMalwareWeb();
     }
 
     /**

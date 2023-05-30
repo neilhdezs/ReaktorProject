@@ -40,6 +40,12 @@ export interface Malware {
   description: string;
 }
 
+export interface MalwareDTOWeb {
+  name: string;
+  description: string;
+  numOccurrences: number;
+}
+
 export interface Cpu {
   cores: number;
   frequency: number;

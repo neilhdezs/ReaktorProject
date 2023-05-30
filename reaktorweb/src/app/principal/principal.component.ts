@@ -15,7 +15,7 @@ export class PrincipalComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-
+    this.getComputers();
     this.subscription = interval(1000).subscribe(x => { this.getComputers(); });
 
   }

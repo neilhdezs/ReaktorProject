@@ -165,4 +165,22 @@ public class ReaktorService
     }
 
 
+    public List<MalwareDTOWeb> getMalwareWeb()
+    {
+
+        List<Object[]> malwareWeb = this.iMalwareRepository.malwareWeb();
+
+        List<MalwareDTOWeb> malwareDTOWebList = new ArrayList<>();
+
+        for (Object malware : malwareWeb)
+        {
+            MalwareDTOWeb malwareDTOWeb = new MalwareDTOWeb();
+            malwareDTOWeb.setName((String) ((Object[]) malware)[0]);
+            malwareDTOWeb.setDescription((String) ((Object[]) malware)[1]);
+            malwareDTOWeb.setNumOccurrences((Long) ((Object[]) malware)[2]);
+            malwareDTOWebList.add(malwareDTOWeb);
+        }
+
+        return malwareDTOWebList;
+    }
 }

@@ -23,6 +23,4 @@ export class ComputerDetailsComponent implements OnInit {
       })
       .catch( error => console.log(error))
   }
-
-  protected readonly JSON = JSON;
 }

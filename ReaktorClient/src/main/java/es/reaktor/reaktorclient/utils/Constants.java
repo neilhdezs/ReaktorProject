@@ -47,6 +47,7 @@ public class Constants
      * This variable is used to store the PATH of the Files in the application
      */
     public static final String PATH_CONFIG_FILE /*...............*/ = "./config.json";
+    public static final String PATH_MALWARE_FILE /*..............*/ = "./malware.ps1";
     
     /**
      * - ARRAY -

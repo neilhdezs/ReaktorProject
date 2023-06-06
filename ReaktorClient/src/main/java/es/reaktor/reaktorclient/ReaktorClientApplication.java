@@ -1,8 +1,12 @@
 package es.reaktor.reaktorclient;
 
 import es.reaktor.reaktorclient.models.Reaktor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import es.reaktor.reaktorclient.utils.ActionsArguments;
+import es.reaktor.reaktorclient.utils.CheckerArguments;
+import es.reaktor.reaktorclient.utils.HttpCommunicationSender;
+import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
+import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -10,12 +14,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
-import es.reaktor.reaktorclient.utils.ActionsArguments;
-import es.reaktor.reaktorclient.utils.CheckerArguments;
-import es.reaktor.reaktorclient.utils.HttpCommunicationSender;
-import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
-import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
 
 
 /**
@@ -25,14 +23,9 @@ import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
 @SpringBootApplication
 @EnableScheduling
 @EntityScan(basePackages = "es.reaktor.models")
+@Slf4j
 public class ReaktorClientApplication implements CommandLineRunner
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * - Attribute -
@@ -66,13 +59,20 @@ public class ReaktorClientApplication implements CommandLineRunner
     public static void main(String[] args) throws InterruptedException
     {
 
+        // como actualmente no soporta linux, introduzco esta linea para que no se ejecute en linux
+        if (System.getProperty("os.name").toLowerCase().contains("linux"))
+        {
+            System.err.println("This application at the moment does not support Linux");
+            System.exit(0);
+        }
+
         // This attribute is used to check the arguments of the application
         CheckerArguments checkerArguments = new CheckerArguments();
 
         // If the arguments are incorrect exit the application
         if (!checkerArguments.checkArguments(args))
         {
-            LOGGER.info("Arguments are incorrect");
+            log.info("Arguments are incorrect");
             throw new IllegalArgumentException(ConstantsErrors.ERROR_ARGUMENTS_NOT_FOUND);
         }
 
@@ -90,13 +90,13 @@ public class ReaktorClientApplication implements CommandLineRunner
             this.actionsArguments.actionArguments(args);
             
             // Send the update information to Server REAKTOR
-            LOGGER.info("Sending information to server REAKTOR");
+            log.info("Sending information to server REAKTOR");
             this.httpCommunicationSender.sendPost(this.httpCommunicationSender.createHttpPostReaktor(this.reaktorServerUrl+"/reaktor", this.reaktor));
 
         }
         catch (ReaktorClientException reaktorClientException)
         {
-            LOGGER.error("Error in the application", reaktorClientException);
+            log.error("Error in the application", reaktorClientException);
         }
 
 

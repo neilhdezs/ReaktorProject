@@ -1,26 +1,19 @@
 package es.reaktor.reaktorclient.linux;
 
-import jakarta.annotation.PostConstruct;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import es.reaktor.models.Configuration;
 import es.reaktor.reaktorclient.utils.CommandExecutor;
 import es.reaktor.reaktorclient.utils.ReadFiles;
 import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public final class LinuxMotherboard
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private ReadFiles readFiles;
@@ -79,7 +72,7 @@ public final class LinuxMotherboard
         catch (ReaktorClientException reaktorClientException)
         {
             hardwareUUIDForLinux = ConstantsErrors.ERROR_GETTING_HARDWARE_UUID_LINUX;
-            LOGGER.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_UUID_LINUX, reaktorClientException);
+            log.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_UUID_LINUX, reaktorClientException);
             reaktorClientException.printStackTrace();
         }
 

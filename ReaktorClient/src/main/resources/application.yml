@@ -3,6 +3,6 @@ server:
 
 reaktor:
   server:
-    url: "http://localhost:8084"
+    url: "http://143.47.41.0:8084/"
   computerOnReport: 5_000
   malwareReport: 2_500

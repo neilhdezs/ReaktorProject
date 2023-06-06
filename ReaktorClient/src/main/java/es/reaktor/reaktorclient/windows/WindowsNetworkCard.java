@@ -5,8 +5,6 @@ import es.reaktor.models.Motherboard;
 import es.reaktor.models.NetworkCard;
 import es.reaktor.reaktorclient.utils.CommandExecutor;
 import es.reaktor.reaktorclient.utils.StringsUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import oshi.hardware.NetworkIF;
@@ -18,12 +16,6 @@ import java.util.List;
 @Service
 public class WindowsNetworkCard
 {
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
-
     @Autowired
     private StringsUtils stringsUtils;
 

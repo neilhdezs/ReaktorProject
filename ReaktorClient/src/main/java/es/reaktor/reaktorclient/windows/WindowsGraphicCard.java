@@ -1,19 +1,16 @@
 package es.reaktor.reaktorclient.windows;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import es.reaktor.models.GraphicCard;
-import es.reaktor.models.Motherboard;
 import es.reaktor.models.Id.GraphicCardId;
+import es.reaktor.models.Motherboard;
 import es.reaktor.reaktorclient.utils.CommandExecutor;
 import es.reaktor.reaktorclient.utils.Constants;
 import es.reaktor.reaktorclient.utils.StringsUtils;
 import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import oshi.hardware.GraphicsCard;
 import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 
@@ -25,14 +22,9 @@ import java.util.List;
  * This class is used to get the information of the graphic card of the computer
  */
 @Service
+@Slf4j
 public class WindowsGraphicCard
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private StringsUtils stringsUtils;
@@ -113,7 +105,7 @@ public class WindowsGraphicCard
         {
             // We set the id of my graphic card to unknown in case of exception
             idGraphicCard = Constants.UNKNOWN;
-            LOGGER.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
+            log.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
             reaktorClientException.printStackTrace();
         }
 

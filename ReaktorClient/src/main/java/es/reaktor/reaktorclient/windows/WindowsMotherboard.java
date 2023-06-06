@@ -1,12 +1,5 @@
 package es.reaktor.reaktorclient.windows;
 
-import jakarta.annotation.PostConstruct;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import es.reaktor.models.Configuration;
 import es.reaktor.models.Motherboard;
 import es.reaktor.reaktorclient.utils.CommandExecutor;
@@ -15,6 +8,11 @@ import es.reaktor.reaktorclient.utils.HttpCommunicationSender;
 import es.reaktor.reaktorclient.utils.ReadFiles;
 import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import oshi.SystemInfo;
 import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
@@ -27,15 +25,9 @@ import java.util.HashSet;
  * This class is used to get the hardware information of the computer in Windows OS
  */
 @Service
+@Slf4j
 public final class WindowsMotherboard
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
-
 
     /**
      * - Attribute -
@@ -152,8 +144,8 @@ public final class WindowsMotherboard
         }
         catch (ReaktorClientException reaktorClientException)
         {
-            LOGGER.warn(reaktorClientException.getMessage());
-            LOGGER.warn(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, reaktorClientException);
+            log.warn(reaktorClientException.getMessage());
+            log.warn(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, reaktorClientException);
             reaktorClientException.printStackTrace();
         }
         return new Date();
@@ -197,7 +189,7 @@ public final class WindowsMotherboard
         catch (ReaktorClientException reaktorClientException)
         {
             model = Constants.UNKNOWN;
-            LOGGER.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
+            log.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
             reaktorClientException.printStackTrace();
         }
 

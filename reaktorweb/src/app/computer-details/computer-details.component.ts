@@ -16,7 +16,7 @@ export class ComputerDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.computerId = this.route.snapshot.paramMap.get('id')!;
-    Axios.get('http://localhost:8084/reaktor/' + this.computerId)
+    Axios.get("http://143.47.41.0:8084" + '/reaktor/' + this.computerId)
       .then( response => {
         this.computer = response.data;
         console.log(this.computer)

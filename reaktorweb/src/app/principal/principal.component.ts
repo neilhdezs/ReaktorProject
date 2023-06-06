@@ -21,7 +21,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   private getComputers() {
-    this.http.get<SimpleComputerDTO[]>('http://localhost:8084/computer').subscribe(data => {
+    this.http.get<SimpleComputerDTO[]>("http://143.47.41.0:8084" + '/computer').subscribe(data => {
       this.computers = data;
     });
   }

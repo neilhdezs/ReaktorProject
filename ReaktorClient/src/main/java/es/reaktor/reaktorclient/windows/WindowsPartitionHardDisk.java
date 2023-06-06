@@ -3,8 +3,6 @@ package es.reaktor.reaktorclient.windows;
 import es.reaktor.models.HardDisk;
 import es.reaktor.models.Id.PartitionId;
 import es.reaktor.models.Partition;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import oshi.hardware.HWDiskStore;
 import oshi.hardware.HWPartition;
@@ -18,12 +16,6 @@ import java.util.List;
 @Service
 public class WindowsPartitionHardDisk
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
 
     /**
      * - Attribute -

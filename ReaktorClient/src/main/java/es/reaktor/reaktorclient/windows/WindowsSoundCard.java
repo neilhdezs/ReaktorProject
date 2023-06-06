@@ -1,28 +1,25 @@
 package es.reaktor.reaktorclient.windows;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import es.reaktor.models.Id.SoundCardId;
 import es.reaktor.models.Motherboard;
 import es.reaktor.models.SoundCard;
-import es.reaktor.models.Id.SoundCardId;
 import es.reaktor.reaktorclient.utils.CommandExecutor;
 import es.reaktor.reaktorclient.utils.Constants;
 import es.reaktor.reaktorclient.utils.StringsUtils;
 import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class WindowsSoundCard
 {
-    private final Logger LOGGER = LogManager.getLogger();
-
     @Autowired
     private StringsUtils stringsUtils;
 
@@ -98,7 +95,7 @@ public class WindowsSoundCard
         {
             // We set the id of my graphic card to unknown in case of exception
             idSoundCard = Constants.UNKNOWN;
-            LOGGER.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
+            log.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
             reaktorClientException.printStackTrace();
         }
 

@@ -1,11 +1,9 @@
 package es.reaktor.reaktorclient.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class MessageSender extends Thread
 {
 
@@ -20,11 +18,6 @@ public class MessageSender extends Thread
             "\"@\n" +
             "[MessagePopup]::MessageBox(0,\"Estas siendo monitorizado por el sistema del I.E.S Jandula, cierra los siguientes programas, se tomaran medidas si no lo haces.`nMALWARE detectado: %s\", \"AVISO DE MALWARE AL RESPONSABLE\", 0)";
 
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private static final Logger LOGGER = LogManager.getLogger();
 
     private final WriteFiles writeFiles;
 
@@ -55,7 +48,7 @@ public class MessageSender extends Thread
         }
         catch (ReaktorClientException reaktorClientException)
         {
-            LOGGER.warn("Error sending message", reaktorClientException);
+            log.warn("Error sending message", reaktorClientException);
         }
     }
 

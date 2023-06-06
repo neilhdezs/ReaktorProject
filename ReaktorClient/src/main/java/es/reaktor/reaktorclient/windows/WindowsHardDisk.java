@@ -1,12 +1,9 @@
 package es.reaktor.reaktorclient.windows;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Service;
-
 import es.reaktor.models.HardDisk;
-import es.reaktor.models.Motherboard;
 import es.reaktor.models.Id.HardDiskId;
+import es.reaktor.models.Motherboard;
+import org.springframework.stereotype.Service;
 import oshi.hardware.HWDiskStore;
 import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 
@@ -16,12 +13,6 @@ import java.util.List;
 @Service
 public class WindowsHardDisk
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
 
     private WindowsHardwareAbstractionLayer windowsHardwareAbstractionLayer;
 

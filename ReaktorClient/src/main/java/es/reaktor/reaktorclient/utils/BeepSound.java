@@ -1,24 +1,15 @@
 package es.reaktor.reaktorclient.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.nio.file.Paths;
-import java.util.Locale;
 
 @Service
+@Slf4j
 public class BeepSound extends Thread
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private static final Logger LOGGER = LogManager.getLogger();
 
     private final CommandExecutor commandExecutor;
 
@@ -37,7 +28,7 @@ public class BeepSound extends Thread
         }
         catch (ReaktorClientException reaktorClientException)
         {
-            LOGGER.warn("Error this comand doesn`t work", reaktorClientException);
+            log.warn("Error this comand doesn`t work", reaktorClientException);
         }
     }
 }

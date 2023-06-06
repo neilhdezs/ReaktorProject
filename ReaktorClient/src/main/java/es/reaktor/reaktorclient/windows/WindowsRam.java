@@ -1,18 +1,16 @@
 package es.reaktor.reaktorclient.windows;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import es.reaktor.models.Id.RamId;
 import es.reaktor.models.Motherboard;
 import es.reaktor.models.Ram;
-import es.reaktor.models.Id.RamId;
 import es.reaktor.reaktorclient.utils.CommandExecutor;
 import es.reaktor.reaktorclient.utils.Constants;
 import es.reaktor.reaktorclient.utils.StringsUtils;
 import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
 import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import oshi.hardware.PhysicalMemory;
 import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 
@@ -25,14 +23,9 @@ import java.util.UUID;
  * This class is used to get the information of the ram of the computer
  */
 @Service
+@Slf4j
 public class WindowsRam
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
 
     /**
      * - Attribute -
@@ -92,7 +85,7 @@ public class WindowsRam
         {
             // We set the id of my ram to unknown in case of exception
             idRam = Constants.UNKNOWN + " " + UUID.randomUUID();
-            LOGGER.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
+            log.warn(ConstantsErrors.ERROR_GETTING_HARDWARE_MODEL_MOTHERBOARD, reaktorClientException);
             reaktorClientException.printStackTrace();
         }
 

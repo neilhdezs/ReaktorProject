@@ -1,23 +1,14 @@
 package es.reaktor.reaktorclient.windows;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Service;
-
 import es.reaktor.models.Cpu;
-import es.reaktor.models.Motherboard;
 import es.reaktor.models.Id.CpuId;
+import es.reaktor.models.Motherboard;
+import org.springframework.stereotype.Service;
 import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 
 @Service
 public class WindowsCpu
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
 
 
     /**

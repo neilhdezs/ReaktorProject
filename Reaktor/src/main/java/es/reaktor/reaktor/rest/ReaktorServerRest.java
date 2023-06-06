@@ -11,8 +11,6 @@ import es.reaktor.reaktor.reaktor_actions.ReaktorService;
 import es.reaktor.reaktor.repository.IMalwareRepository;
 import es.reaktor.reaktor.repository.IMotherboardRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,12 +24,6 @@ import java.util.List;
 @Slf4j
 public class ReaktorServerRest
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private ReaktorActions reaktorActions;
@@ -148,12 +140,12 @@ public class ReaktorServerRest
     {
         try
         {
-            LOGGER.info("Reporting malware for motherboard {}", serialNumber);
+            log.info("Reporting malware for motherboard {}", serialNumber);
             this.reaktorActions.insertMalwareMotherboard(serialNumber, malwareList);
         }
         catch (Exception exception)
         {
-            LOGGER.warn("Malware not reported", exception);
+            log.warn("Malware not reported", exception);
             return ResponseEntity.ok("Malware not reported");
         }
 

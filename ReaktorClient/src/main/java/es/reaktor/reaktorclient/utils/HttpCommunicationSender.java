@@ -1,6 +1,10 @@
 package es.reaktor.reaktorclient.utils;
 
+import es.reaktor.models.Malware;
 import es.reaktor.reaktorclient.models.Reaktor;
+import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
+import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -10,14 +14,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import es.reaktor.models.Malware;
-import es.reaktor.reaktorclient.utils.exceptions.ConstantsErrors;
-import es.reaktor.reaktorclient.utils.exceptions.ReaktorClientException;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,14 +25,9 @@ import java.util.List;
  * This class is used to send a POST request to a URL
  */
 @Service
+@Slf4j
 public class HttpCommunicationSender
 {
-
-    /**
-     * - Logger -
-     * This logger is used to log the information of the application
-     */
-    private final Logger LOGGER = LogManager.getLogger();
 
     /**
      * - Service -
@@ -72,17 +65,17 @@ public class HttpCommunicationSender
         }
         catch (ClientProtocolException clientProtocolException)
         {
-            LOGGER.error(ConstantsErrors.ERROR_CLIENT_PROTOCOL, clientProtocolException);
+            log.error(ConstantsErrors.ERROR_CLIENT_PROTOCOL, clientProtocolException);
             throw new ReaktorClientException(ConstantsErrors.ERROR_CLIENT_PROTOCOL, "426", clientProtocolException);
         }
         catch (IOException ioException)
         {
-            LOGGER.error(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, ioException);
+            log.error(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, ioException);
             throw new ReaktorClientException(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, "500", ioException);
         }
         catch (Exception exception)
         {
-            LOGGER.error(ConstantsErrors.ERROR_BY_DEFAULT, exception);
+            log.error(ConstantsErrors.ERROR_BY_DEFAULT, exception);
             throw new ReaktorClientException(ConstantsErrors.ERROR_BY_DEFAULT, "500", exception);
         }
     }
@@ -114,17 +107,17 @@ public class HttpCommunicationSender
         }
         catch (ClientProtocolException clientProtocolException)
         {
-            LOGGER.error(ConstantsErrors.ERROR_CLIENT_PROTOCOL, clientProtocolException);
+            log.error(ConstantsErrors.ERROR_CLIENT_PROTOCOL, clientProtocolException);
             throw new ReaktorClientException(ConstantsErrors.ERROR_CLIENT_PROTOCOL, "426", clientProtocolException);
         }
         catch (IOException ioException)
         {
-            LOGGER.error(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, ioException);
+            log.error(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, ioException);
             throw new ReaktorClientException(ConstantsErrors.ERROR_COMMUNICATION_TO_SERVER, "500", ioException);
         }
         catch (Exception exception)
         {
-            LOGGER.error(ConstantsErrors.ERROR_BY_DEFAULT, exception);
+            log.error(ConstantsErrors.ERROR_BY_DEFAULT, exception);
             throw new ReaktorClientException(ConstantsErrors.ERROR_BY_DEFAULT, "500", exception);
         }
     }
